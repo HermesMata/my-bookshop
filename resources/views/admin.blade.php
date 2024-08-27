@@ -6,107 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') - Espace d'administration</title>
     @vite(['resources/js/app.js'])
+    {{-- Bibliothèques tierces --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js" defer></script>
+
 </head>
 <body>
     {{-- La barre de navigation --}}
-    <nav
-        class="navbar navbar-expand-md navbar-light bg-light"
-    >
-        <div class="container">
-            <a class="navbar-brand" href="{{route('home')}}/#">{{ config("app.name") }}</a>
-            <button
-                class="navbar-toggler d-lg-none"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavId"
-                aria-controls="collapsibleNavId"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"
-                            >Abonnements
-                            <span class="visually-hidden">(current)</span></a
-                        >
-                    </li>
-                    {{-- Catégories des livres --}}
-                    <li class="nav-item dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="dropdownId"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            >Catégories</a
-                        >
-                        <div
-                            class="dropdown-menu"
-                            aria-labelledby="dropdownId"
-                        >
-                            <a class="dropdown-item" href="#"
-                                >
-                                Action 1
-                                </a
-                            >
-                            <a class="dropdown-item" href="#"
-                                >
-                                Action 2
-                                </a
-                            >
-                        </div>
-                    </li>
-                    {{-- Mon compte --}}
-                    <li class="nav-item dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="dropdownId"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            >
-                            Mon compte
-                            </a
-                        >
-                        <div
-                            class="dropdown-menu"
-                            aria-labelledby="dropdownId"
-                        >
-                            <a class="dropdown-item" href="#"
-                                >
-                                Inscription
-                                </a
-                            >
-                            <a class="dropdown-item" href="#"
-                                >
-                                Connexion
-                                </a
-                            >
-                        </div>
-                    </li>
-                </ul>
-                {{-- Formulaire de recherche --}}
-                <form class="d-flex my-2 my-lg-0">
-                    <input
-                        class="form-control me-sm-2"
-                        type="text"
-                        placeholder="Trouver un livre..."
-                    />
-                    <button
-                        class="btn btn-outline-success my-2 my-sm-0"
-                        type="submit"
-                    >
-                        GO
-                    </button>
-                </form>
-            </div>
-        </div>
-    </nav>
+    @include('shared.navbar')
 
 
     {{-- Le contenu de la page --}}
@@ -115,10 +21,13 @@
             <nav class="p-2 shadow" style="height: calc(100dvh - 70px);">
                 DB Admin
                 <!-- Hover added -->
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active"
-                        >Catégories</a
+                <div class="list-group border-0">
+                    <a
+                        href="{{ route("admin.categories.index") }}"
+                        @class(['list-group-item list-group-item-action', 'active' => Route::is("admin.categories.index")])
                     >
+                        Catégories
+                    </a>
                     <a href="#" class="list-group-item list-group-item-action"
                         >Livres</a
                     >
@@ -129,7 +38,7 @@
             </nav>
 
         </div>
-        <div class="col-10">
+        <div class="col-10 pt-3">
             <div class="container">
                 @yield('content')
 
