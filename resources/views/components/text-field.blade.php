@@ -12,7 +12,9 @@
             @if($big) cols="30" rows="10" @endif
             style="resize: none;"
             placeholder="{{ $placeholder }}"
-        ></textarea>
+            >
+            {{$value ?? ''}}
+        </textarea>
     @else
         <input
             type="{{$type}}"
@@ -20,6 +22,7 @@
             id="{{$id}}"
             name="{{$name}}"
             placeholder="{{ $placeholder }}"
+            value="{{$value ?? 'Aucune valeur'}}"
         >
     @endif
     @if ($errors->has($name))

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class BookCategory extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "name",
+        "slug",
+        "poster",
+        "description",
+    ];
 }

@@ -3,7 +3,7 @@
 @section('title', 'Les catégories de livres dans la bibliothèque')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-start">
+    <div class="d-flex justify-content-between align-items-start my-3">
         <h1>Catégories des livres</h1>
         <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Ajouter une catégorie</a>
     </div>
@@ -12,13 +12,13 @@
     >
         @if (count($categories) > 0)
             <table
-                class="table table-stripped table-hover"
+                class="table table-striped border-top"
             >
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nom de la catégorie</th>
-                        <th scope="col text-end">Action</th>
+                        <th scope="col" class="text-end">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,8 +28,21 @@
                     @foreach ($categories as $category)
                         <tr class="">
                             <th scope="row">{{$index}}</td>
-                            <td>R1C2</td>
-                            <td>R1C3</td>
+                            <td>{{$category->name}}</td>
+                            {{-- Actions --}}
+                            <td class="text-end">
+                                <div class="hstack gap-2">
+                                    {{-- Editer --}}
+                                    <a href="{{route('admin.categories.edit', $category)}}" class="btn btn-outline-secondary ms-auto">Modifier</a>
+                                    <div class="vr"></div>
+                                    {{-- Supprimer une catégorie --}}
+                                    <form action="{{route('admin.categories.destroy', $category)}}" method="post">
+                                        @csrf
+                                        @method("delete")
+                                        <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         @php
                             $index++;

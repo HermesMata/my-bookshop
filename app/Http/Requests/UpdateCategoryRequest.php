@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\BookCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CreateCategoryRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +25,12 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             "name" => ["required", "min:2"],
-            "slug" => ["required", "unique:book_categories"],
+            "slug" => [
+                "required",
+                Rule::unless(function () {
+                    return BookCategory::where("slug", $this->input("slug"))->exists();
+                }, "unique:book_categories")
+            ],
             "description" => ["required", "min:10"]
         ];
     }

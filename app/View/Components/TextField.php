@@ -18,6 +18,7 @@ class TextField extends Component
         public string $placeholder = "",
         public string $helpText = "",
         public ?string $label = null,
+        public ?string $value = null,
         public bool $big = false
     ) {
         //
