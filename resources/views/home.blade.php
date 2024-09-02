@@ -11,4 +11,7 @@
             </p>
         </div>
     </section>
+    @php
+        phpinfo();
+    @endphp
 @endsection

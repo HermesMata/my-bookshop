@@ -13,6 +13,24 @@
     {{-- La barre de navigation --}}
     @include('shared.navbar')
 
+    {{-- Les messages de session --}}
+    @if (session('success'))
+        <div class="container">
+            <div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+            >
+                {{ session('success') }}
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+        </div>
+
+    @endif
     {{-- Le contenu de la page --}}
     @yield('content')
 

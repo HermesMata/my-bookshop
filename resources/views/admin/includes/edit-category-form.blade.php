@@ -9,6 +9,7 @@
         label="Nom de la catégorie"
         placeholder="Entrez le nom de la nouvelle catégorie"
         value="{{$category->name ?? ''}}"
+        required
     />
     <x-text-field
         type="textarea"
@@ -17,6 +18,7 @@
         label="Description"
         placeholder="Entrez le nom de la nouvelle catégorie"
         :value="$category->description ?? null"
+        required
     />
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Valider</button>

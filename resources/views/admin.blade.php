@@ -23,14 +23,45 @@
                 <!-- Hover added -->
                 <div class="list-group border-0">
                     <a
+                        href="{{ route("admin.authors.index") }}"
+                        @class([
+                            'list-group-item list-group-item-action',
+                            'active' => Route::is([
+                                "admin.authors.index",
+                                "admin.authors.view",
+                                "admin.authors.create",
+                                "admin.authors.edit",
+                            ])
+                            ])
+                    >
+                        Auteurs
+                    </a>
+                    <a
                         href="{{ route("admin.categories.index") }}"
-                        @class(['list-group-item list-group-item-action', 'active' => Route::is("admin.categories.index")])
+                        @class([
+                            'list-group-item list-group-item-action',
+                            'active' => Route::is([
+                                "admin.categories.index",
+                                "admin.categories.view",
+                                "admin.categories.create",
+                                "admin.categories.edit",
+                            ])])
                     >
                         Catégories
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action"
-                        >Livres</a
+                    <a
+                        href="{{ route("admin.books.index") }}"
+                        @class([
+                            'list-group-item list-group-item-action',
+                            'active' => Route::is([
+                                "admin.books.index",
+                                "admin.books.create",
+                                "admin.books.view",
+                                "admin.books.edit",
+                            ])])
                     >
+                        Livres
+                    </a>
                     <a href="#" class="list-group-item list-group-item-action disabled"
                         >Clients</a
                     >
@@ -40,6 +71,24 @@
         </div>
         <div class="col-10 pt-3">
             <div class="container">
+                {{-- Les messages de session --}}
+                @if (session('success'))
+                    <div class="my-3">
+                        <div
+                            class="alert alert-success alert-dismissible fade show"
+                            role="alert"
+                        >
+                            {{ session('success') }}
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                    </div>
+
+                @endif
                 @yield('content')
 
             </div>

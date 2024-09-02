@@ -22,8 +22,17 @@
                     class="form-control"
                     label="Mot de passe"
                 />
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <button type="submit" class="btn btn-success w-100">Connexion</button>
+                </div>
+                <div class="form-group mb-3 text-center" style="font-size: 0.85em;">
+                    <span><a href="#" class="text-decoration-none link-secondary">Mot de passe oublié ?</a></span>
+                    <p>
+                        Vous n'avez pas de compte ?
+                        <a href="{{ route('user.register') }}" class="text-decoration-none">
+                            Inscrivez-vous par ici
+                        </a>.
+                    </p>
                 </div>
             </form>
         </div>

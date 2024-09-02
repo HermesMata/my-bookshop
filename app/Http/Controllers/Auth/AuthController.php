@@ -22,14 +22,13 @@ class AuthController extends Controller
         } else {
             return back()->withErrors([
                 'email' => "Identifiants incorrects."
-            ]);
+            ])->onlyInput('email');
         }
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->regenerate();
         return to_route("home");
     }
 }

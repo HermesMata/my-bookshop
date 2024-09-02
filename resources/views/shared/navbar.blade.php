@@ -78,8 +78,8 @@
                                 >Gérer mon compte</a
                                 >
                                 <form action="{{ route("auth.logout") }}" method="post">
-                                    @csrf
                                     @method("delete")
+                                    @csrf
                                     <button type="submit" class="dropdown-item text-danger">Déconnexion</button>
                                 </form>
                             @endauth

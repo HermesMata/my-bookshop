@@ -2,18 +2,18 @@
 
 namespace App\Http\Requests;
 
-use App\Models\BookCategory;
+use App\Models\BookAuthor;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class UpdateBookAuthorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return in_array($this->user()->role, ['admin']);
     }
 
     /**
@@ -24,16 +24,16 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", "min:2"],
-            "slug" => ["required", Rule::unique("book_categories")->ignore($this->route()->parameter('cateory'))],
-            "description" => ["required", "min:10"]
+            "name" => ["required", "min:3"],
+            "slug" => ["required", Rule::unique("book_authors")->ignore($this->route()->parameter('author'))],
+            "biography" => ["min:50"]
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            "slug" => $this->input("slug") ?? \Str::slug($this->input("name"))
+            "slug" => $this->input('slug') ?? \Str::slug($this->input('name'))
         ]);
     }
 }

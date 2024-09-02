@@ -6,25 +6,26 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class TextField extends Component
+class SelectField extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
         public string $name,
-        public string $id,
-        public string $type = "text",
+        public \Illuminate\Support\Collection|array $options,
+        public ?string $id = null,
         public string $placeholder = "",
         public string $helpText = "",
         public ?string $label = null,
-        public ?string $value = null,
-        public bool $big = false,
+        public ?string $selected = null,
         public bool $indicators = true,
         public bool $required = false,
         public bool $withSlug = false,
     ) {
-        //
+        if (!$id) {
+            $id = $name . "Field";
+        }
     }
 
     /**
@@ -32,6 +33,6 @@ class TextField extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.text-field');
+        return view('components.select-field');
     }
 }
